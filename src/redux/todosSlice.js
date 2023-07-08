@@ -33,9 +33,17 @@ const todosSlice = createSlice({
         };
         return todo;
       })
+    },
+    editTextTodo(state, {payload: {id, text}}) {
+      state.todos = state.todos.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, text }
+        };
+        return todo;
+      })
     }
   },
 });
 
 export const todosReducer = todosSlice.reducer;
-export const { addTodo, deleteTodo, incrementLike, decrementLike } = todosSlice.actions;
+export const { addTodo, deleteTodo, incrementLike, decrementLike, editTextTodo } = todosSlice.actions;
