@@ -1,12 +1,8 @@
 // import { Component } from 'react';
 // import { nanoid } from 'nanoid';
 
-import {
-  Container,
-  Header,
-  SearchForm,
-  Section,
-} from 'components';
+import { Container, Header, SearchForm, Section } from 'components';
+import { Filter } from 'components/Filter/Filter';
 import TodoList from 'components/TodoList/TodoList';
 
 export const App = () => {
@@ -58,6 +54,7 @@ export const App = () => {
       <Section>
         <Container>
           <SearchForm />
+          <Filter />
           <TodoList />
         </Container>
       </Section>

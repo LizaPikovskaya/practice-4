@@ -2,12 +2,12 @@ import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const todosSlice = createSlice({
   name: 'todos',
-  initialState: { todos: [] },
+  initialState: [],
   reducers: {
     addTodo: {
       reducer: (state, action) => {
-        console.log(action);
-        state.todos.push(action.payload);
+        console.log(state);
+        state.push(action.payload);
       },
       prepare: text => {
         const id = nanoid();

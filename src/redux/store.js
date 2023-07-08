@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -12,13 +12,21 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import {todosReducer} from './todosSlice';
+import { filterReducer } from './filterSlice';
 
 const persistConfig = {
   key: 'todos',
   storage,
+  whitelist: ['todos'], 
 };
 
-const persistedReducer = persistReducer(persistConfig, todosReducer);
+const rootReducer = combineReducers({
+  todos: todosReducer,
+  filter: filterReducer,
+});
+
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

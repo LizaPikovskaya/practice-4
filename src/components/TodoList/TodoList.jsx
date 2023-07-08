@@ -4,7 +4,14 @@ import { selectTodos } from 'redux/selectors';
 
 const TodoList = () => {
   // const todos = [{ text: 'Dog', id: 1 }];
+
+  const filter = useSelector(state => state.filter);
   const todos = useSelector(selectTodos);
+
+  const visibleTodos = () => {
+    return todos.filter(todo => todo.text.includes(filter));
+  };
+
   return (
     <>
       {todos.length === 0 && (
@@ -12,7 +19,7 @@ const TodoList = () => {
       )}
       <Grid>
         {todos.length > 0 &&
-          todos.map(({ id, text, likes }, index) => (
+          visibleTodos().map(({ id, text, likes }, index) => (
             <GridItem key={id}>
               <Todo id={id} text={text} likes={likes} counter={index + 1} />
             </GridItem>
