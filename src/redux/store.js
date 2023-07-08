@@ -11,14 +11,14 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import rootReducer from './todosSlice';
+import {todosReducer} from './todosSlice';
 
 const persistConfig = {
   key: 'todos',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, todosReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
