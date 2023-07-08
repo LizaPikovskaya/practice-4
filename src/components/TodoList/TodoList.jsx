@@ -12,9 +12,9 @@ const TodoList = () => {
       )}
       <Grid>
         {todos.length > 0 &&
-          todos.map((todo, index) => (
-            <GridItem key={todo.id}>
-              <Todo id={todo.id} text={todo.text} counter={index + 1} />
+          todos.map(({ id, text, likes }, index) => (
+            <GridItem key={id}>
+              <Todo id={id} text={text} likes={likes} counter={index + 1} />
             </GridItem>
           ))}
       </Grid>
