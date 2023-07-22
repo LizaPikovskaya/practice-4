@@ -15,14 +15,29 @@ export const commentApi = createApi({
       providesTags: ["comments"],
     }),
     updateComment: builder.mutation({
-      query: ({ id, ...comment }) => ({
+      query: ({ id, comment }) => ({
         url: `${API_ENDPOINT}/${id}`,
         method: "PUT",
+        body: {...comment},
+      }),
+      invalidatesTags: ["comments"],
+    }),
+    addComment: builder.mutation({
+      query: ( comment ) => ({
+        url: `${API_ENDPOINT}`,
+        method: "POST",
         body: comment,
+      }),
+      invalidatesTags: ["comments"],
+    }),
+    deleteComment: builder.mutation({
+      query: ( id ) => ({
+        url: `${API_ENDPOINT}/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["comments"],
     }),
   }),
 });
 
-export const { useGetAllCommentsQuery, useUpdateCommentMutation } = commentApi;
+export const { useGetAllCommentsQuery, useUpdateCommentMutation, useAddCommentMutation, useDeleteCommentMutation } = commentApi;
