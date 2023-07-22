@@ -1,63 +1,20 @@
-// import { Component } from 'react';
-// import { nanoid } from 'nanoid';
-
-import { Container, Header, SearchForm, Section } from 'components';
-import { Filter } from 'components/Filter/Filter';
-import TodoList from 'components/TodoList/TodoList';
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Layout } from '../../layout/Layout/Layout';
+import { routes } from '../../routes';
+import { Home, Options } from '../../views';
 
 export const App = () => {
-  // state = {
-  //   todos: [],
-  // };
-
-  // componentDidMount() {
-  //   const todos = JSON.parse(localStorage.getItem('todos'));
-
-  //   if (todos) {
-  //     this.setState(() => ({ todos }));
-  //   }
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { todos } = this.state;
-
-  //   if (prevState.todos !== todos) {
-  //     localStorage.setItem('todos', JSON.stringify(todos));
-  //   }
-  // }
-
-  // addTodo = text => {
-  //   const todo = {
-  //     id: nanoid(),
-  //     text,
-  //   };
-
-  //   this.setState(({ todos }) => ({
-  //     todos: [...todos, todo],
-  //   }));
-  // };
-
-  // handleSubmit = data => {
-  //   this.addTodo(data);
-  // };
-
-  // deleteTodo = id => {
-  //   this.setState(prevState => ({
-  //     todos: prevState.todos.filter(todo => todo.id !== id),
-  //   }));
-  // };
-
-  // const { todos } = this.state;
-
   return (
     <>
-      <Header />
-      <Section>
-        <Container>
-          <SearchForm />
-          <Filter />
-          <TodoList />
-        </Container>
-      </Section>
+      <Routes>
+        <Route path={routes.HOME} element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path={routes.OPTIONS} element={<Options />} />
+        </Route>
+
+        <Route path='*' element={<Navigate to={routes.HOME} replace />} />
+      </Routes>
     </>
   );
 };
